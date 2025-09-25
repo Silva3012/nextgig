@@ -39,18 +39,63 @@ class _DiscoverPageState extends State<DiscoverPage> {
     super.dispose();
   }
 
-  void _onAccept() {
-    if (_current < _posts.length - 1) {
-      _pageController?.animateToPage(
-        _current + 1,
-        duration: const Duration(milliseconds: 250),
-        curve: Curves.easeOut,
-      );
-    }
+  /// Displays a confirmation modal to the user.
+  void _showConfirmationModal(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(
+                  Icons.check_circle_outline,
+                  color: AppColors.primaryGreen,
+                  size: 60,
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'Interest Shown!',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  'A notification has been sent to the author of this post. We will let you know when they respond.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: AppColors.textSecondary),
+                ),
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
+                    ),
+                    child: const Text('OK'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
-  void _onReject() {
-    if (_current < _posts.length - 1) {
+  /// Handles the "Show Interest" action by showing a confirmation and then advancing the page.
+  void _onShowInterest() {
+    if (_current < _posts.length) {
+      // Show the modal first
+      _showConfirmationModal(context);
+
+      // Animate to the next page after a short delay for better UX
       _pageController?.animateToPage(
         _current + 1,
         duration: const Duration(milliseconds: 250),
@@ -139,21 +184,14 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                       child: Text(post.description),
                                     ),
                                   ),
+                                  const SizedBox(height: 16),
                                   Row(
                                     children: [
                                       Expanded(
-                                        child: OutlinedButton.icon(
-                                          onPressed: _onReject,
-                                          icon: const Icon(Icons.close),
-                                          label: const Text('Reject'),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 12),
-                                      Expanded(
                                         child: ElevatedButton.icon(
-                                          onPressed: _onAccept,
+                                          onPressed: _onShowInterest,
                                           icon: const Icon(Icons.favorite),
-                                          label: const Text('Accept'),
+                                          label: const Text('show interest'),
                                         ),
                                       ),
                                     ],
