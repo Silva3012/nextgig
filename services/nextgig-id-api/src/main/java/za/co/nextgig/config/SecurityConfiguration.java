@@ -25,8 +25,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth-> auth.requestMatchers(WHITE_LIST_URL).permitAll().anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults()).formLogin(Customizer.withDefaults())
+                .authorizeHttpRequests(auth-> auth.requestMatchers(WHITE_LIST_URL).permitAll())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).build();
     }
 }
