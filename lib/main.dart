@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nextgig/core/theme/app_theme.dart';
+import 'package:nextgig/presentation/shell/main_shell.dart';
 
 void main() {
   runApp(const NextGig());
@@ -9,11 +11,10 @@ class NextGig extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: const Placeholder());
+      title: 'NextGig',
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.darkTheme,
+      home: const MainShell(),
+    );
   }
 }
