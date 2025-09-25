@@ -15,11 +15,11 @@ class MainShell extends StatefulWidget {
 class _MainShellState extends State<MainShell> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = const [
-    DiscoverPage(),
-    PostingPage(),
+  final List<Widget> _pages = [
+    const DiscoverPage(),
+    const PostingPage(),
     InsightsPage(),
-    RepWalletPage(),
+    const RepWalletPage(),
   ];
 
   @override
