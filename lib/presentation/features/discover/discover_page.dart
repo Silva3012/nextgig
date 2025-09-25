@@ -39,7 +39,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
     super.dispose();
   }
 
-  void _onAccept() {
+  void _onShowInterest() {
     if (_current < _posts.length - 1) {
       _pageController?.animateToPage(
         _current + 1,
@@ -49,15 +49,15 @@ class _DiscoverPageState extends State<DiscoverPage> {
     }
   }
 
-  void _onReject() {
-    if (_current < _posts.length - 1) {
-      _pageController?.animateToPage(
-        _current + 1,
-        duration: const Duration(milliseconds: 250),
-        curve: Curves.easeOut,
-      );
-    }
-  }
+  // void _onReject() {
+  //   if (_current < _posts.length - 1) {
+  //     _pageController?.animateToPage(
+  //       _current + 1,
+  //       duration: const Duration(milliseconds: 250),
+  //       curve: Curves.easeOut,
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -139,21 +139,14 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                       child: Text(post.description),
                                     ),
                                   ),
+                                  const SizedBox(height: 16),
                                   Row(
                                     children: [
                                       Expanded(
-                                        child: OutlinedButton.icon(
-                                          onPressed: _onReject,
-                                          icon: const Icon(Icons.close),
-                                          label: const Text('Reject'),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 12),
-                                      Expanded(
                                         child: ElevatedButton.icon(
-                                          onPressed: _onAccept,
-                                          icon: const Icon(Icons.favorite),
-                                          label: const Text('Accept'),
+                                          onPressed: _onShowInterest,
+                                          icon: const Icon(Icons.thumb_up),
+                                          label: const Text('show interest'),
                                         ),
                                       ),
                                     ],
