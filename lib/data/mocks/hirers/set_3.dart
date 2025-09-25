@@ -1,0 +1,308 @@
+import 'package:nextgig/data/models/user_model.dart';
+
+final List<UserModel> mockHirersSet3 = [
+  // h021
+  UserModel(
+    id: "h021",
+    firstName: "Kgothatso",
+    lastName: "Radebe",
+    idNumber: "7206235854081",
+    idVerified: true,
+    location: "Mahikeng, North West",
+    locationVerified: true,
+    isRemote: false,
+    isBusinessOwner: true,
+    businessDetails: BusinessDetails(
+      name: "Radebe Plumbing",
+      sector: "Construction",
+      description: "Plumbing services for residential and commercial clients",
+      services: ["Pipe repairs", "Leak detection", "Installations"],
+    ),
+    portfolioLinks: [],
+    languages: ["English", "Tswana"],
+    skills: ["Plumbing", "Maintenance"],
+    learningInterests: ["Solar water heating systems"],
+    educationHistory: [],
+    reputationScore: 4.4,
+    reviews: [
+      Review(
+        reviewerId: "u201",
+        comment: "Quick and professional service.",
+        rating: 4.5,
+        date: DateTime(2025, 7, 18),
+      )
+    ],
+    createdAt: DateTime(2025, 3, 20),
+    updatedAt: DateTime(2025, 9, 10),
+  ),
+
+// h022
+  UserModel(
+    id: "h022",
+    firstName: "Petronella",
+    lastName: "Smit",
+    idNumber: "6804125820085",
+    idVerified: true,
+    location: "George, Western Cape",
+    locationVerified: true,
+    isRemote: false,
+    isBusinessOwner: false,
+    businessDetails: null,
+    portfolioLinks: [],
+    languages: ["Afrikaans", "English"],
+    skills: ["Baking", "Cooking"],
+    learningInterests: ["Cake decorating", "Nutrition"],
+    educationHistory: [],
+    reputationScore: 0.0,
+    reviews: [],
+    createdAt: DateTime(2025, 4, 2),
+    updatedAt: DateTime(2025, 9, 12),
+  ),
+
+// h023
+  UserModel(
+    id: "h023",
+    firstName: "Lerato",
+    lastName: "Mabena",
+    idNumber: "7502095840082",
+    idVerified: true,
+    location: "Tembisa, Gauteng",
+    locationVerified: true,
+    isRemote: false,
+    isBusinessOwner: true,
+    businessDetails: BusinessDetails(
+      name: "Mabena Sewing Studio",
+      sector: "Textiles",
+      description: "Custom clothing and alterations",
+      services: ["Sewing", "Pattern making", "Tailoring"],
+    ),
+    portfolioLinks: ["https://instagram.com/mabena.sewing"],
+    languages: ["English", "Zulu"],
+    skills: ["Sewing", "Fashion design"],
+    learningInterests: ["Pattern making"],
+    educationHistory: [],
+    reputationScore: 4.6,
+    reviews: [
+      Review(
+        reviewerId: "u210",
+        comment: "Excellent craftsmanship and service.",
+        rating: 5.0,
+        date: DateTime(2025, 7, 2),
+      )
+    ],
+    createdAt: DateTime(2025, 2, 18),
+    updatedAt: DateTime(2025, 9, 19),
+  ),
+
+// h024
+  UserModel(
+    id: "h024",
+    firstName: "Riaan",
+    lastName: "Pienaar",
+    idNumber: "6505115804089",
+    idVerified: true,
+    location: "Bloemfontein, Free State",
+    locationVerified: true,
+    isRemote: true,
+    isBusinessOwner: false,
+    businessDetails: null,
+    portfolioLinks: ["https://github.com/riaanpienaar"],
+    languages: ["English", "Afrikaans"],
+    skills: ["Software development", "Web design"],
+    learningInterests: ["Cloud computing", "AI integration"],
+    educationHistory: [
+      Education(
+        qualification: "BSc Computer Science",
+        institution: "University of the Free State",
+      )
+    ],
+    reputationScore: 4.7,
+    reviews: [],
+    createdAt: DateTime(2025, 3, 12),
+    updatedAt: DateTime(2025, 9, 10),
+  ),
+
+// h025
+  UserModel(
+    id: "h025",
+    firstName: "Zanele",
+    lastName: "Hadebe",
+    idNumber: "7108025854087",
+    idVerified: false,
+    location: "Pietermaritzburg, KwaZulu-Natal",
+    locationVerified: true,
+    isRemote: false,
+    isBusinessOwner: true,
+    businessDetails: BusinessDetails(
+      name: "Hadebe Gardening",
+      sector: "Gardening",
+      description: "Residential gardening and landscaping services",
+      services: ["Garden maintenance", "Irrigation", "Plant care"],
+    ),
+    portfolioLinks: [],
+    languages: ["Zulu", "English"],
+    skills: ["Gardening", "Landscaping"],
+    learningInterests: ["Urban farming"],
+    educationHistory: [],
+    reputationScore: 4.1,
+    reviews: [],
+    createdAt: DateTime(2025, 4, 20),
+    updatedAt: DateTime(2025, 9, 15),
+  ),
+
+// h026
+  UserModel(
+    id: "h026",
+    firstName: "Hannes",
+    lastName: "van Rooyen",
+    idNumber: "6401015723081",
+    idVerified: true,
+    location: "Stellenbosch, Western Cape",
+    locationVerified: true,
+    isRemote: true,
+    isBusinessOwner: true,
+    businessDetails: BusinessDetails(
+      name: "van Rooyen IT Solutions",
+      sector: "Technology",
+      description: "IT consulting and software development",
+      services: ["App development", "Web design", "IT support"],
+    ),
+    portfolioLinks: ["https://github.com/hannesvr"],
+    languages: ["English", "Afrikaans"],
+    skills: ["Coding", "IT consulting"],
+    learningInterests: ["AI tools", "Cloud solutions"],
+    educationHistory: [
+      Education(
+        qualification: "BSc IT",
+        institution: "Stellenbosch University",
+      )
+    ],
+    reputationScore: 4.9,
+    reviews: [
+      Review(
+        reviewerId: "u220",
+        comment: "Professional IT services, highly recommended.",
+        rating: 5.0,
+        date: DateTime(2025, 7, 15),
+      )
+    ],
+    createdAt: DateTime(2025, 1, 10),
+    updatedAt: DateTime(2025, 9, 20),
+  ),
+
+// h027
+  UserModel(
+    id: "h027",
+    firstName: "Sibongile",
+    lastName: "Nkuna",
+    idNumber: "7308105803082",
+    idVerified: true,
+    location: "Mamelodi, Gauteng",
+    locationVerified: true,
+    isRemote: false,
+    isBusinessOwner: false,
+    businessDetails: null,
+    portfolioLinks: [],
+    languages: ["English", "Zulu"],
+    skills: ["Hairdressing", "Makeup artistry"],
+    learningInterests: ["Nail art", "Skin care"],
+    educationHistory: [],
+    reputationScore: 0.0,
+    reviews: [],
+    createdAt: DateTime(2025, 4, 12),
+    updatedAt: DateTime(2025, 9, 18),
+  ),
+
+// h028
+  UserModel(
+    id: "h028",
+    firstName: "Pieter",
+    lastName: "Fourie",
+    idNumber: "6805095842083",
+    idVerified: true,
+    location: "Upington, Northern Cape",
+    locationVerified: true,
+    isRemote: false,
+    isBusinessOwner: true,
+    businessDetails: BusinessDetails(
+      name: "Fourie Welding",
+      sector: "Construction",
+      description: "Custom metal work and welding services",
+      services: ["Welding", "Metal fabrication", "Repairs"],
+    ),
+    portfolioLinks: [],
+    languages: ["Afrikaans", "English"],
+    skills: ["Welding", "Metal fabrication"],
+    learningInterests: ["Safety standards", "Advanced welding"],
+    educationHistory: [],
+    reputationScore: 4.5,
+    reviews: [
+      Review(
+        reviewerId: "u230",
+        comment: "Great quality work, fast delivery.",
+        rating: 4.5,
+        date: DateTime(2025, 6, 10),
+      )
+    ],
+    createdAt: DateTime(2025, 2, 18),
+    updatedAt: DateTime(2025, 9, 18),
+  ),
+
+// h029
+  UserModel(
+    id: "h029",
+    firstName: "Thandeka",
+    lastName: "Mthethwa",
+    idNumber: "7103195880082",
+    idVerified: false,
+    location: "Ngcobo, Eastern Cape",
+    locationVerified: true,
+    isRemote: false,
+    isBusinessOwner: false,
+    businessDetails: null,
+    portfolioLinks: [],
+    languages: ["Xhosa", "English"],
+    skills: ["Tutoring", "Teaching assistance"],
+    learningInterests: ["Math curriculum", "Science experiments"],
+    educationHistory: [],
+    reputationScore: 0.0,
+    reviews: [],
+    createdAt: DateTime(2025, 5, 2),
+    updatedAt: DateTime(2025, 9, 12),
+  ),
+
+// h030
+  UserModel(
+    id: "h030",
+    firstName: "Fanie",
+    lastName: "Joubert",
+    idNumber: "6502175820081",
+    idVerified: true,
+    location: "Knysna, Western Cape",
+    locationVerified: true,
+    isRemote: false,
+    isBusinessOwner: true,
+    businessDetails: BusinessDetails(
+      name: "Joubert Carpentry",
+      sector: "Construction",
+      description: "Furniture and home repairs",
+      services: ["Tables", "Cabinets", "Home repairs"],
+    ),
+    portfolioLinks: [],
+    languages: ["Afrikaans", "English"],
+    skills: ["Carpentry", "Woodworking"],
+    learningInterests: ["CNC woodworking"],
+    educationHistory: [],
+    reputationScore: 4.6,
+    reviews: [
+      Review(
+        reviewerId: "u245",
+        comment: "Beautiful craftsmanship.",
+        rating: 5.0,
+        date: DateTime(2025, 6, 15),
+      )
+    ],
+    createdAt: DateTime(2025, 2, 12),
+    updatedAt: DateTime(2025, 9, 18),
+  ),
+];
