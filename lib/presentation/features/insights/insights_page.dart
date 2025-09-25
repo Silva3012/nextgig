@@ -52,7 +52,8 @@ class InsightsPage extends StatelessWidget {
             builder: (context, constraints) {
               final double width = constraints.maxWidth;
               final int crossAxisCount = width < 360 ? 1 : 2;
-              final double aspectRatio = width < 360 ? 2.6 : 1.8;
+              // Smaller ratio => taller tiles; prevents bottom overflow
+              final double aspectRatio = width < 360 ? 1.6 : 1.4;
               return GridView.count(
                 crossAxisCount: crossAxisCount,
                 crossAxisSpacing: 12,
@@ -63,16 +64,20 @@ class InsightsPage extends StatelessWidget {
                 children: kpis.entries.map((e) {
                   return Card(
                     child: Padding(
-                      padding: const EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(12),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(
-                            e.value,
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              e.value,
+                              style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                           const SizedBox(height: 6),

@@ -252,15 +252,6 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          const Card(
-            child: Padding(
-              padding: EdgeInsets.all(16),
-              child: Text(
-                'Reputation Wallet: Upload your ID and CV (coming soon).',
-                style: TextStyle(color: AppColors.textSecondary),
-              ),
-            ),
-          ),
         ],
       ),
     );
