@@ -1,14 +1,41 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:nextgig/core/theme/app_theme.dart';
 import 'package:nextgig/presentation/features/profile/profile_page.dart';
+import 'package:file_picker/file_picker.dart';
 
-class RepWalletPage extends StatelessWidget {
+class RepWalletPage extends StatefulWidget {
   const RepWalletPage({super.key});
 
+  @override
+  State<RepWalletPage> createState() => _RepWalletPageState();
+}
+
+class _RepWalletPageState extends State<RepWalletPage> {
   void _openProfile(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => const ProfilePage()),
     );
+  }
+
+  File? selectedFile;
+
+  void _onTapUpload() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: false,
+    );
+
+    if (result != null && result.files.single.path != null) {
+      setState(() {
+        selectedFile = File(result.files.single.path!);
+      });
+    } else {
+      setState(() {
+        selectedFile = null;
+      });
+    }
   }
 
   @override
@@ -43,7 +70,9 @@ class RepWalletPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      _onTapUpload();
+                    },
                     icon: const Icon(Icons.badge_outlined),
                     label: const Text('Upload ID'),
                   ),
@@ -58,6 +87,19 @@ class RepWalletPage extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 20),
+            selectedFile != null
+                ? Column(
+                    children: [
+                      Image.file(selectedFile!, width: 150, height: 150),
+                      OutlinedButton.icon(
+                        onPressed: () {},
+                        icon: const Icon(Icons.badge_outlined),
+                        label: const Text('Submit'),
+                      ),
+                    ],
+                  )
+                : const Text('No image selected'),
           ],
         ),
       ),

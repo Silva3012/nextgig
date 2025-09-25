@@ -18,8 +18,8 @@ class _MainShellState extends State<MainShell> {
   final List<Widget> _pages = [
     const DiscoverPage(),
     const PostingPage(),
-    InsightsPage(),
-    const RepWalletPage(),
+    const InsightsPage(),
+    RepWalletPage(),
   ];
 
   @override
