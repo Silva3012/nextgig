@@ -38,9 +38,6 @@ spring:
         springframework:
           data:
             mongodb: INFO
-      com:
-        verification:
-          service: DEBUG
   data:
     mongodb:
       auto-index-creation: 'true'
@@ -52,11 +49,10 @@ server:
   port: '8080'
 logging:
   level:
+    za:
+      co:
+        nextgig: INFO
     org:
       springframework:
         data:
           mongodb: INFO
-    com:
-      verification:
-        service: DEBUG
-
