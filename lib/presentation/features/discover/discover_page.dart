@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:nextgig/core/theme/app_theme.dart';
 import 'package:nextgig/data/mocks/hirers/set_1.dart';
 import 'package:nextgig/data/mocks/jobs/jobs.dart';
+import 'package:nextgig/data/posts/post_repository.dart';
 import 'package:nextgig/presentation/features/profile/profile_page.dart';
 import 'package:nextgig/data/models/job_post_model.dart';
 import 'package:nextgig/data/models/user_model.dart';
+import 'package:nextgig/services/gemini/gemini_service.dart';
+import 'package:nextgig/domain/posts/post_models.dart';
 
 class DiscoverPage extends StatefulWidget {
   const DiscoverPage({super.key});
@@ -15,14 +18,14 @@ class DiscoverPage extends StatefulWidget {
 
 class _DiscoverPageState extends State<DiscoverPage> {
   List<GigPostModel> _posts = [];
+  List<Post> _savedPosts = [];
   int _current = 0;
   PageController? _pageController;
 
   @override
   void initState() {
     super.initState();
-    // Load mock data directly
-    _posts = mockGigPosts;
+    _loadPosts();
     _pageController = PageController(viewportFraction: 0.92);
   }
 
@@ -30,6 +33,32 @@ class _DiscoverPageState extends State<DiscoverPage> {
   void dispose() {
     _pageController?.dispose();
     super.dispose();
+  }
+
+  Future<void> _loadPosts() async {
+    final postRepo = SharedPrefsPostRepository();
+    final savedPosts = await postRepo.getPosts();
+
+    // Map the saved Post models to GigPostModel for display
+    final mappedPosts = savedPosts.map((post) {
+      return GigPostModel(
+        id: post.id,
+        posterId: post.authorId,
+        title: post.title,
+        employerName: 'Freelancer',
+        gigType: post.type == PostType.job ? GigType.piece : GigType.apprentice,
+        isRemote: post.isRemote,
+        location: post.location ?? 'Remote',
+        rateOrPrice: 0,
+        compensationUnit: 'Per Hour',
+        description: post.description,
+        requiredSkills: post.tags,
+      );
+    }).toList();
+
+    setState(() {
+      _posts = [...mappedPosts, ...mockGigPosts];
+    });
   }
 
   /// Displays a confirmation modal to the user.
@@ -228,109 +257,111 @@ class _DiscoverPageState extends State<DiscoverPage> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 4, vertical: 4),
                           child: Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    gigPost.title,
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    'By ${user.firstName}',
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        color: AppColors.textSecondary),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    gigPost.employerName,
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        color: AppColors.textSecondary),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Wrap(
-                                    spacing: 8,
-                                    runSpacing: 8,
-                                    children: [
-                                      Chip(
-                                        label: Text(gigPost.gigType.name,
-                                            style: const TextStyle(
-                                                color: AppColors.textPrimary)),
-                                        backgroundColor: AppColors.primaryGreen
-                                            .withOpacity(
-                                                0.2), // Light green background
-                                      ),
-                                      if (gigPost.isRemote)
+                            child: SingleChildScrollView(
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      gigPost.title,
+                                      style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      'By ${user.firstName}',
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          color: AppColors.textSecondary),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      gigPost.employerName,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          color: AppColors.textSecondary),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Wrap(
+                                      spacing: 8,
+                                      runSpacing: 8,
+                                      children: [
                                         Chip(
-                                          label: const Text('Remote',
-                                              style: TextStyle(
+                                          label: Text(gigPost.gigType.name,
+                                              style: const TextStyle(
                                                   color:
                                                       AppColors.textPrimary)),
-                                          backgroundColor: AppColors.accentBlue
+                                          backgroundColor: AppColors
+                                              .primaryGreen
                                               .withOpacity(
-                                                  0.2), // Light blue background
+                                                  0.2), // Light green background
                                         ),
-                                      Chip(
-                                        label: Text(
-                                          '${gigPost.location}',
-                                          style: const TextStyle(
-                                              color: AppColors.textSecondary),
-                                        ),
-                                        backgroundColor: AppColors.textSecondary
-                                            .withOpacity(0.2),
-                                      )
-                                    ],
-                                  ),
-                                  const SizedBox(height: 12),
-                                  Text(
-                                    '${gigPost.rateOrPrice == 0 ? 'Volunteer' : 'R ${gigPost.rateOrPrice}'} ${gigPost.compensationUnit}',
-                                    style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: AppColors.primaryGreen),
-                                  ),
-                                  const SizedBox(height: 12),
-                                  Expanded(
-                                    child: SingleChildScrollView(
-                                      child: Text(gigPost.description),
+                                        if (gigPost.isRemote)
+                                          Chip(
+                                            label: const Text('Remote',
+                                                style: TextStyle(
+                                                    color:
+                                                        AppColors.textPrimary)),
+                                            backgroundColor: AppColors
+                                                .accentBlue
+                                                .withOpacity(
+                                                    0.2), // Light blue background
+                                          ),
+                                        Chip(
+                                          label: Text(
+                                            '${gigPost.location}',
+                                            style: const TextStyle(
+                                                color: AppColors.textSecondary),
+                                          ),
+                                          backgroundColor: AppColors
+                                              .textSecondary
+                                              .withOpacity(0.2),
+                                        )
+                                      ],
                                     ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Wrap(
-                                    spacing: 8,
-                                    runSpacing: 8,
-                                    children: gigPost.requiredSkills
-                                        .map((k) => Chip(label: Text(k)))
-                                        .toList(),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: ElevatedButton.icon(
-                                          onPressed: _onShowInterest,
-                                          icon: const Icon(Icons.favorite),
-                                          label: const Text('show interest'),
+                                    const SizedBox(height: 12),
+                                    Text(
+                                      '${gigPost.rateOrPrice == 0 ? 'Volunteer' : 'R ${gigPost.rateOrPrice}'} ${gigPost.compensationUnit}',
+                                      style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.primaryGreen),
+                                    ),
+                                    const SizedBox(height: 12),
+                                    Text(gigPost.description),
+                                    const SizedBox(height: 16),
+                                    Wrap(
+                                      spacing: 8,
+                                      runSpacing: 8,
+                                      children: gigPost.requiredSkills
+                                          .map((k) => Chip(label: Text(k)))
+                                          .toList(),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: ElevatedButton.icon(
+                                            onPressed: _onShowInterest,
+                                            icon: const Icon(Icons.favorite),
+                                            label: const Text('show interest'),
+                                          ),
                                         ),
-                                      ),
-                                      // const SizedBox(width: 8),
-                                      // Expanded(
-                                      //   child: OutlinedButton.icon(
-                                      //     onPressed: () =>
-                                      //         _onGetPayRange(gigPost),
-                                      //     icon: const Icon(Icons.percent),
-                                      //     label: const Text('Get Pay Range'),
-                                      //   ),
-                                      // ),
-                                    ],
-                                  )
-                                ],
+                                        // const SizedBox(width: 8),
+                                        // Expanded(
+                                        //   child: OutlinedButton.icon(
+                                        //     onPressed: () =>
+                                        //         _onGetPayRange(gigPost),
+                                        //     icon: const Icon(Icons.percent),
+                                        //     label: const Text('Get Pay Range'),
+                                        //   ),
+                                        // ),
+                                      ],
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),

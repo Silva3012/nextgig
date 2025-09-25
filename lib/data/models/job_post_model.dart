@@ -18,12 +18,12 @@ class GigPostModel {
   final String location; // Physical location (city, township, or 'Remote')
 
   // --- Compensation & Period ---
-  final CompensationType compensationType; // e.g., Hourly, FixedPrice
+  final CompensationType? compensationType; // e.g., Hourly, FixedPrice
   final double rateOrPrice; // The rand amount (e.g., 150.00)
   final String
       compensationUnit; // e.g., "per hour," "total for job," or "per week"
 
-  final String
+  final String?
       periodEstimate; // How long is the work? e.g., "2 hours," "3 days," "1 year"
 
   // --- Employer/Poster Information ---
@@ -34,8 +34,8 @@ class GigPostModel {
 
   // --- Metadata & Status ---
   final bool isActive; // Is the job still open?
-  final DateTime createdAt;
-  final DateTime expiresAt; // For automatic expiry of posts
+  final DateTime? createdAt;
+  final DateTime? expiresAt; // For automatic expiry of posts
 
   GigPostModel({
     required this.id,
@@ -47,15 +47,15 @@ class GigPostModel {
     required this.gigType,
     required this.isRemote,
     required this.location,
-    required this.compensationType,
+    this.compensationType,
     required this.rateOrPrice,
     required this.compensationUnit,
-    required this.periodEstimate,
+    this.periodEstimate,
     required this.employerName,
     this.employerBusinessSector,
     this.isActive = true,
-    required this.createdAt,
-    required this.expiresAt,
+    this.createdAt,
+    this.expiresAt,
   });
 }
 
