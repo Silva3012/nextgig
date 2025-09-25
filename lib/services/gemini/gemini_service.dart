@@ -53,6 +53,51 @@ class GeminiService {
     }
   }
 
+  // /// Generates a fair pay range for a gig post using the Gemini API.
+  // Future<String> getFairPayRange(GigPostModel gigPost) async {
+  //   if (_envKey.isEmpty) {
+  //     throw Exception(
+  //         'GEMINI_API_KEY not set. Provide via --dart-define or .env');
+  //   }
+
+  //   // Use a different model for the pay range task.
+  //   final model = GenerativeModel(
+  //     model: 'gemini-2.5-flash-preview-05-20',
+  //     apiKey: _envKey,
+  //     generationConfig: GenerationConfig(
+  //       temperature: 0.3,
+  //       maxOutputTokens: 100, // Keep the response short
+  //     ),
+  //   );
+  //   final prompt = _buildPromptForPayRange(gigPost);
+
+  //   try {
+  //     final response = await model.generateContent([Content.text(prompt)]);
+  //     return response.text ?? 'Could not generate a pay range.';
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
+
+  // /// Builds a detailed prompt for the LLM to get a fair pay range.
+  // String _buildPromptForPayRange(GigPostModel gigPost) {
+  //   return '''
+  //     Based on the following job details, what is a fair and realistic pay range in South African Rands (ZAR)?
+  //     The response must be in a concise, single-sentence format, for example: "A fair pay range for this job is RXXX - RYYY per hour."
+
+  //     ---
+  //     Job Title: ${gigPost.title}
+  //     Description: ${gigPost.description}
+  //     Type: ${gigPost.gigType.name}
+  //     Location: ${gigPost.location}
+  //     Is Remote: ${gigPost.isRemote}
+  //     Required Skills: ${gigPost.requiredSkills.join(', ')}
+  //     Period Estimate: ${gigPost.periodEstimate}
+  //     ---
+  //   '''
+  //       .trim();
+  // }
+
   String _buildPrompt({
     required String title,
     String? freeText,
