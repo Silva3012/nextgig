@@ -18,7 +18,7 @@ class _MainShellState extends State<MainShell> {
   final List<Widget> _pages = [
     const DiscoverPage(),
     const PostingPage(),
-    InsightsPage(),
+    const InsightsPage(),
     const RepWalletPage(),
   ];
 
