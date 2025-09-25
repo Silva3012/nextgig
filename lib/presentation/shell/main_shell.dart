@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nextgig/core/theme/app_theme.dart';
 import 'package:nextgig/presentation/features/discover/discover_page.dart';
-import 'package:nextgig/presentation/features/learning/learning_page.dart';
+import 'package:nextgig/presentation/features/insights/insights_page.dart';
 import 'package:nextgig/presentation/features/posting/posting_page.dart';
-import 'package:nextgig/presentation/features/profile/profile_page.dart';
+import 'package:nextgig/presentation/features/wallet/rep_wallet_page.dart';
 
 class MainShell extends StatefulWidget {
   const MainShell({super.key});
@@ -18,8 +18,8 @@ class _MainShellState extends State<MainShell> {
   final List<Widget> _pages = const [
     DiscoverPage(),
     PostingPage(),
-    LearningPage(),
-    ProfilePage(),
+    InsightsPage(),
+    RepWalletPage(),
   ];
 
   @override
@@ -45,12 +45,12 @@ class _MainShellState extends State<MainShell> {
           NavigationDestination(
             icon: Icon(Icons.school_outlined),
             selectedIcon: Icon(Icons.school),
-            label: 'Learn',
+            label: 'Insights',
           ),
           NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.wallet_outlined),
+            selectedIcon: Icon(Icons.wallet),
+            label: 'Rep Wallet',
           ),
         ],
       ),

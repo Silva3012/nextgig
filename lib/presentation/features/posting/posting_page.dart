@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nextgig/presentation/features/profile/profile_page.dart';
 
 class PostingPage extends StatefulWidget {
   const PostingPage({super.key});
@@ -22,7 +23,18 @@ class _PostingPageState extends State<PostingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Post Opportunity')),
+      appBar: AppBar(
+        title: const Text('Post Opportunity'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person_outline),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const ProfilePage()),
+            ),
+            tooltip: 'Profile',
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(

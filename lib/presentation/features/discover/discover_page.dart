@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nextgig/core/theme/app_theme.dart';
+import 'package:nextgig/presentation/features/profile/profile_page.dart';
 
 class DiscoverPage extends StatefulWidget {
   const DiscoverPage({super.key});
@@ -49,7 +50,18 @@ class _DiscoverPageState extends State<DiscoverPage> {
   Widget build(BuildContext context) {
     final item = _items[_current];
     return Scaffold(
-      appBar: AppBar(title: const Text('Discover')),
+      appBar: AppBar(
+        title: const Text('Discover'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person_outline),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const ProfilePage()),
+            ),
+            tooltip: 'Profile',
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
