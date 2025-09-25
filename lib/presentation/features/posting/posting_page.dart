@@ -42,11 +42,15 @@ class _PostingPageState extends State<PostingPage> {
         location: _locationController.text,
         isRemote: _isRemote,
       );
+
+      // Add this line to print the suggestion object's details
+      print('DEBUG: Generated Post Suggestion: ${suggestion.toJson()}');
+
       setState(() => _preview = suggestion);
-    } catch (_) {
+    } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Could not generate suggestion.')),
+        SnackBar(content: Text('Could not generate suggestion: $e')),
       );
     } finally {
       if (mounted) setState(() => _loading = false);
