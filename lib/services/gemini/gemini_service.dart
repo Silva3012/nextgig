@@ -165,7 +165,8 @@ Example JSON:
 
     // The model should return an array of JSON objects
     try {
-      final List<dynamic> jsonArray = jsonDecode(text) as List<dynamic>;
+      final jsonStr = _extractJson(text);
+      final List<dynamic> jsonArray = jsonDecode(jsonStr) as List<dynamic>;
       return jsonArray
           .map((json) => SkillDemand.fromJson(json as Map<String, dynamic>))
           .toList();
