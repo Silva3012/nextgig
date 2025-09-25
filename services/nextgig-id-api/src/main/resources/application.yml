@@ -1,0 +1,62 @@
+spring:
+  application:
+    name: document-verification-service
+  # Disable Spring banner for cleaner startup logs
+  security:
+    user:
+      name: user
+      password: default
+  banner:
+    charset: UTF-8
+    location: banner/next-gig
+  main:
+    banner-mode: console
+  messages:
+    always-use-message-format: true
+    basename: base
+    encoding: UTF-8
+    fallback-to-system-locale: false
+  # Force ANSI color output for better log readability
+  output:
+    ansi:
+      enabled: always
+  # Mongo DB connection
+  spring:
+    data:
+      mongodb:
+        auto-index-creation: 'true'
+        uri: mongodb://localhost:27017/verification-service
+    servlet:
+      multipart:
+        max-request-size: 10MB
+        max-file-size: 10MB
+  server:
+    port: '8080'
+  logging:
+    level:
+      org:
+        springframework:
+          data:
+            mongodb: INFO
+      com:
+        verification:
+          service: DEBUG
+  data:
+    mongodb:
+      auto-index-creation: 'true'
+  servlet:
+    multipart:
+      max-request-size: 10MB
+      max-file-size: 10MB
+server:
+  port: '8080'
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb: INFO
+    com:
+      verification:
+        service: DEBUG
+
