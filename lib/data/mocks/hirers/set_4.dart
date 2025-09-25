@@ -1,6 +1,6 @@
 import 'package:nextgig/data/models/user_model.dart';
 
-final List<UserModel> mockHirersSet5 = [
+final List<UserModel> mockHirersSet4 = [
   // h031
   UserModel(
     id: "h031",
