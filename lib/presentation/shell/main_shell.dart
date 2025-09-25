@@ -43,8 +43,8 @@ class _MainShellState extends State<MainShell> {
             label: 'Post',
           ),
           NavigationDestination(
-            icon: Icon(Icons.school_outlined),
-            selectedIcon: Icon(Icons.school),
+            icon: Icon(Icons.data_array_outlined),
+            selectedIcon: Icon(Icons.data_array),
             label: 'Insights',
           ),
           NavigationDestination(
